@@ -2,11 +2,11 @@
 	def:[
 		{
 			type: lava,
-			texture: "img/tiles/Lava.png"
+			texture: "img/sprites/tiles.png"
 		},
 		{
 			type: platform,
-			texture: "img/tiles/Platform.png"
+			texture: "img/sprites/tiles.png"
 		},
 		{
 			type: portal,
@@ -28,6 +28,14 @@
 	landmarks:[
 		[5,4,"img/landmarks/Stalactite.png"],
 		[6,7,"img/landmarks/Stalagmite.png"]
+	],
+	itemMap:[
+		{
+			x: 3,
+			y: 0, 
+			type: Items.Key,
+			texture: "img/sprites/key.png"
+		}
 	],
 	startPosition: [0,0]
 };

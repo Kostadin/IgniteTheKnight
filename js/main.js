@@ -57,7 +57,22 @@ function loadLevel(id){
 			});
 		}
 	}
+	
+	var items = [];
+	for(var i=0;i<currentLevel.itemMap.length;++i){
+		item = currentLevel.itemMap[i];
+		items.push({
+			type: item.type,
+			x: item.x*tileWidth,
+			y: item.y*tileHeight,
+			width: tileWidth,
+			height: tileHeight,
+			texture: item.texture
+		});
+	}
+	
 	currentLevel.tiles = tiles;
+	currentLevel.items = items;
 	currentLevel.height = tileHeight*currentLevel.map.length;
 	currentLevel.width = tileWidth*currentLevel.map[0].length;
 	setScreenOrigin(currentLevel);
@@ -72,8 +87,15 @@ function loadLevel(id){
 		}
 	}
 	
+	var items = '';
+	for(var i=0;i<currentLevel.items.length;++i){
+		var item = currentLevel.items[i];
+		items += '<div id="item_'+i+'" class="item" style="left:'+(item.x-screenOriginX)+'px;top:'+(item.y-screenOriginY)+'px;width:'+tileWidth+'px;height:'+tileHeight+'px;background-image:url(\''+item.texture+'\')'+';background-repeat:no-repeat;'+((!tileVisible(item))?'display:none;':'')+'"/>';
+	}
+	
 	$('#level').append(player);
 	$('#level').append(tiles);
+	$('#level').append(items);
 	$('#level').css({
 		display: 'block'
 	});
@@ -90,7 +112,9 @@ function runGame(){
 		gameFrame++;
 
 		animationFrame = Math.floor(gameFrame / animationRatio);
-		
+		tileAnimationFrame = Math.floor(gameFrame / tileAnimationRatio);
+		itemAnimationFrame = Math.floor(gameFrame / itemAnimationRatio);
+
 		//Player variables
 		var p = currentLevel.player;
 		
@@ -133,10 +157,25 @@ function runGame(){
 		//Tiles
 		for(var i=0;i<currentLevel.tiles.length;++i){
 			var tile = currentLevel.tiles[i];
+			var tileFrameInfo = getTileAnimationFrame(tileAnimationFrame, tile.type);
 			$('#tile_'+i).css({
 				left: (tile.x-screenOriginX)+'px',
 				top: (tile.y-screenOriginY)+'px',
+				'background-position': tileFrameInfo.x + 'px ' + tileFrameInfo.y + 'px',
 				display: ((tileVisible(tile))?'block':'none')
+			});
+		}
+		//Items (pickups)
+		for (var i=0;i<currentLevel.items.length;++i)
+		{
+			var item = currentLevel.items[i];
+			var $xml = (item.type == Items.Key ? $keyXml : $heartXml);
+			var itemFrameInfo = getGenericAnimationFrame(itemAnimationFrame, itemAnimationTotalFrames, $xml);
+			$('#item_'+i).css({
+				left: (item.x-screenOriginX)+'px',
+				top: (item.y-screenOriginY)+'px',
+				'background-position': itemFrameInfo.x + 'px ' + itemFrameInfo.y + 'px',
+				display: ((tileVisible(item))?'block':'none')
 			});
 		}
 		//Debug
