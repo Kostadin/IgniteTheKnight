@@ -304,6 +304,8 @@ $(function(){
 			upPressed = true;
 		} else if (code == 39) {
 			rightPressed = true;
+		} else if (code == 40) {
+			downPressed = true;
 		}
 		//M for muting
 		if (e.which == 77 || e.which == 109) {
