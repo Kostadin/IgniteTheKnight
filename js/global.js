@@ -25,7 +25,7 @@ var parallaxRatio = 3;
 //Animation counter
 var animationFrame = 0;
 var gameFrame = 0;
-var animationRatio = 3;
+var animationRatio = 1;
 var tileAnimationFrame = 0;
 var tileAnimationRatio = 45;
 var itemAnimationFrame = 0;

@@ -46,9 +46,9 @@ function loadLevel(id){
 					alert('We are idle.');
 				}
 			} else if (state == PlayerState.Running){
-				this.resetTransitionStepsTo(15);
+				this.resetTransitionStepsTo(10);
 			} else if (state == PlayerState.Jumping){
-				this.resetTransitionStepsTo(15);
+				this.resetTransitionStepsTo(10);
 				if (this.state != state){
 					desiredJump = false;
 					console.log("I don't want to jump anymore.");
