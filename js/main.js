@@ -57,7 +57,7 @@ function loadLevel(id){
 	for(var i=0;i<currentLevel.tiles.length;++i){
 		var tile = currentLevel.tiles[i];
 		if (true){
-			tiles += '<div id="tile_'+i+'" class="tile" style="left:'+(tile.x-screenOriginX)+'px;top:'+(tile.y-screenOriginY)+'px;width:'+tileWidth+'px;height:'+tileHeight+'px;background-image:url("'+tile.texture+'")'+';background-repeat:no-repeat;'+((!tileVisible(tile))?'display:none;':'')+'"/>';
+			tiles += '<div id="tile_'+i+'" class="tile" style="left:'+(tile.x-screenOriginX)+'px;top:'+(tile.y-screenOriginY)+'px;width:'+tileWidth+'px;height:'+tileHeight+'px;background-image:url(\''+tile.texture+'\')'+';background-repeat:no-repeat;'+((!tileVisible(tile))?'display:none;':'')+'"/>';
 		}
 	}
 	
