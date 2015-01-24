@@ -332,6 +332,8 @@ function startGame(){
 	if (!gameRunning){
 		currentTry = 0;
 		currentLevelIndex = 0;
+		titleVideoPlayer.stop();
+		$(titleVideoPlayer).hide();
 		$('#levelNumber').html(currentLevelIndex+1);
 		$('#mainMenu').hide();
 		mainTheme.pause();
@@ -367,10 +369,23 @@ function shuffle(array) {
 }
 
 var introVideoPlayer = null;
+var titleVideoPlayer = null;
 
-function videoEnd()
+function introVideoEnd()
 {
 	$(introVideoPlayer).hide();
+	$(titleVideoPlayer).show();
+	titleVideoPlayer.play();
+
+}
+
+function titleVideoEnd()
+{
+	if (!gameRunning)
+	{
+		titleVideoPlayer.currentTime = 0;
+		titleVideoPlayer.play();
+	}
 }
 
 $(function(){
@@ -382,7 +397,9 @@ $(function(){
 		logstr+=credits[i]+'\n';
 	}
 	introVideoPlayer = document.getElementById('introVideo');
-	introVideoPlayer.addEventListener('ended', videoEnd, false);
+	titleVideoPlayer = document.getElementById('titleLoop');
+	introVideoPlayer.addEventListener('ended', introVideoEnd, false);
+	titleVideoPlayer.addEventListener('ended', titleVideoEnd, false);
 
 	console.log(logstr);
 	$('#btnPlay').click(startGame);
