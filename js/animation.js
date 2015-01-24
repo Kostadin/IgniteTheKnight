@@ -27,8 +27,8 @@ function getPlayerAnimationFrame(frame, state, direction) {
 			break;
 			}
 		case PlayerState.Crashing: {
-			frame = frame % playerMiscAnimation.length;
-			return getSpriteCoords($playerXml, "c"+dir+playerMiscAnimation[frame]);
+			if (playerCrashingFrame < playerMiscAnimation.length - 1) playerCrashingFrame++
+			return getSpriteCoords($playerXml, "c"+dir+playerMiscAnimation[playerCrashingFrame]);
 			}
 		case PlayerState.Winning: {
 			return getSpriteCoords($playerXml, "gg"+playerMiscAnimation[0]);

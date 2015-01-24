@@ -58,6 +58,10 @@ function loadLevel(id){
 				if (this.state != state){
 					console.log('We crashed.');
 				}
+				else {
+					state = PlayerState.Idle;
+					desiredMoveDirection = null;
+				}
 			} else if (state == PlayerState.Incapacitated){
 				this.resetTransitionStepsTo(stepsIncapacitated);
 				if (this.state != state){

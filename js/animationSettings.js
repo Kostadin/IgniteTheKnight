@@ -7,7 +7,7 @@ var $heartXml = $('<TextureAtlas imagePath="sprites.png"><SubTexture name="1.png
 
 var playerRunAnimation = ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png"];
 var playerMiscAnimation = ["1.png","1.png","2.png","2.png","3.png","3.png","4.png","4.png","5.png","5.png","6.png","6.png","7.png","7.png","8.png","8.png","9.png","9.png"];
-
+var playerCrashingFrame = 0;
 var tileAnimation = ["1.png","2.png"];
 
 /*

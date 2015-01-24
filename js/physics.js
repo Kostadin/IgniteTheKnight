@@ -61,6 +61,10 @@ function checkForTransition(currentTile, p){
 		var nextTile = currentLevel.tiles[nextJ*currentLevel.map[0].length + nextI];
 		if (currentTile != nextTile){
 			if (nextTile.type == wall){
+				if (p.state != PlayerState.Crashing)
+				{
+					playerCrashingFrame = 0;
+				}
 				p.transitionStateTo(PlayerState.Crashing);//Or incapacitated here ...
 				p.moveDirection = null;
 			} else {
