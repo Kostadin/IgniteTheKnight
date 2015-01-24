@@ -115,7 +115,7 @@ function runGame(){
 				top: (p.y-screenOriginY+playerDivOffsetY)+'px',
 				'background-position': playerFrameInfo.x + 'px ' + playerFrameInfo.y + 'px',
 				'transform-origin': '50% 50%',
-				transform: 'scaleX(1)'
+				transform: 'scaleX(-1)'
 			});
 		}
 		else {
@@ -125,7 +125,7 @@ function runGame(){
 				top: (p.y-screenOriginY+playerDivOffsetY)+'px',
 				'background-position': playerFrameInfo.x + 'px ' + playerFrameInfo.y + 'px',
 				'transform-origin': '50% 50%',
-				transform: 'scaleX(-1)'
+				transform: 'scaleX(1)'
 			});
 		}
 		//Tiles

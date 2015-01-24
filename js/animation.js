@@ -14,41 +14,24 @@ function getDeathSpriteCoords(name) {
 	};
 }
 
-function getPlayerAnimationFrame(frame, animation, color) {
+function getPlayerAnimationFrame(frame, state, direction) {
 // Rework
-return {x:0, y:0};
-
-	switch (animation) {
-		case "run": {
+	switch (state) {
+		case PlayerState.Run: {
+			var dir = "s";	//left/right
+			if (direction == "up") dir = "b";
+			if (direction == "down") dir = "f";
 			frame = frame % playerRunAnimation.length;
-			var sprite = getSpriteCoords(color+playerRunAnimation[frame]);
+			var sprite = getSpriteCoords(dir+playerRunAnimation[frame]);
 			var info = {
 				x: sprite.x,
 				y: sprite.y
 				};
 			break;
 			}
-		case "idle": {
+		case PlayerState.Idle: {
 			frame = frame % playerIdleAnimation.length;
-			var sprite = getSpriteCoords(color+playerIdleAnimation[frame]);
-			var info = {
-				x: sprite.x,
-				y: sprite.y
-				};
-			break;
-			}
-		case "jump": {
-			frame = frame % playerJumpAnimation.length;
-			var sprite = getSpriteCoords(color+playerJumpAnimation[frame]);
-			var info = {
-				x: sprite.x,
-				y: sprite.y
-				};
-			break;
-			}
-		case "fall": {
-			frame = frame % playerFallAnimation.length;
-			var sprite = getSpriteCoords(color+playerFallAnimation[frame]);
+			var sprite = getSpriteCoords(playerIdleAnimation[frame]);
 			var info = {
 				x: sprite.x,
 				y: sprite.y
@@ -69,6 +52,9 @@ return {x:0, y:0};
 
 
 function getPlayerDeathAnimationFrame (frame) {
+// Rework
+return {x:0, y:0};
+
 	frame = frame % playerDeathAnimation.length;
 	var sprite = getDeathSpriteCoords(playerDeathAnimation[frame]);
 	var info = {
