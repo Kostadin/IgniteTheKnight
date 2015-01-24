@@ -11,7 +11,7 @@ var currentLevel = null;
 var gameRunning = false;
 var muteSound = false;
 var playerFacing = "right";
-var playerDivOffsetX = 0;
+var playerDivOffsetX = -25;
 var playerDivOffsetY = 0;
 var parallaxRatio = 3;
 //Animation counter
