@@ -6,7 +6,7 @@ function setScreenOrigin(level){
 	screenOriginX = Math.min(Math.max(level.player.x-(screenWidth/2),0), level.width-screenWidth);
 	screenOriginY = Math.min(Math.max(level.player.y-(screenHeight/2),0), level.height-screenHeight);
 	if ((ox!=screenOriginX)||(oy!=screenOriginY)){
-		console.log('screenOriginX = '+screenOriginX+' screenOriginY = '+screenOriginY);
+		//console.log('screenOriginX = '+screenOriginX+' screenOriginY = '+screenOriginY);
 	}
 }
 
@@ -46,6 +46,10 @@ function loadLevel(id){
 				this.resetTransitionStepsTo(15);
 			} else if (state == PlayerState.Jumping){
 				this.resetTransitionStepsTo(15);
+				if (this.state != state){
+					desiredJump = false;
+					console.log("I don't want to jump anymore.");
+				}
 			} else if (state == PlayerState.Crashing){
 				this.resetTransitionStepsTo(5);
 			} else if (state == PlayerState.Incapacitated){
@@ -386,6 +390,7 @@ $(function(){
 		// Desired jump
 		if (spacePressed){
 			desiredJump = true;
+			console.log("I want to jump.");
 		}
 		//M for muting
 		if (e.which == 77 || e.which == 109) {

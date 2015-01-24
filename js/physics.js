@@ -46,37 +46,50 @@ function checkForTransition(currentTile, p){
 	} else {
 		if (currentTile.type == lava){
 			if (p.state != PlayerState.Jumping){
-				p.transitionStateTo(PlayerState.Dying);
+				console.log("Pre-transition:");
 				console.log(currentTile);
 				console.log(p);
-				//alert('We are dying :(');
-			} else {
-				
+				alert('We are dying :(');
+				p.transitionStateTo(PlayerState.Dying);
+				console.log("Post-transition:");
+				console.log(currentTile);
+				console.log(p);
+				return;
 			}
-		} else {
-			var nextTile = currentLevel.tiles[nextJ*currentLevel.map[0].length + nextI];
-			if (currentTile != nextTile){
-				if (nextTile.type == wall){
-					p.transitionStateTo(PlayerState.Crashing);
-					p.moveDirection = null;
+		} 
+		
+		var nextTile = currentLevel.tiles[nextJ*currentLevel.map[0].length + nextI];
+		if (currentTile != nextTile){
+			if (nextTile.type == wall){
+				p.transitionStateTo(PlayerState.Crashing);
+				p.moveDirection = null;
+			} else {
+				if (p.canJump && desiredJump){
+					p.transitionStateTo(PlayerState.Jumping);
+				} else if ((currentTile.type == lava)&&(nextTile.type != lava)&&(p.state == PlayerState.Jumping)){
+					p.transitionStateTo(PlayerState.Jumping);
 				} else {
-					if (p.canJump && desiredJump){
-						p.transitionStateTo(PlayerState.Jumping);
-					} else {
-						p.transitionStateTo(PlayerState.Running);
-						p.i = nextI;
-						p.j = nextJ;
-					}
+					p.transitionStateTo(PlayerState.Running);
 				}
+				p.i = nextI;
+				p.j = nextJ;
 			}
 		}
+	}
+}
+
+function doPlayerAnimation(p){
+	if (p.transitionStepsRemaining > 0){
+		p.x = p.previousX + (p.totalTransitionSteps-p.transitionStepsRemaining)*((p.i*tileWidth-p.previousX)/(1.0*p.totalTransitionSteps));
+		p.y = p.previousY + (p.totalTransitionSteps-p.transitionStepsRemaining)*((p.j*tileHeight-p.previousY)/(1.0*p.totalTransitionSteps));
+		p.transitionStepsRemaining -= 1;
 	}
 }
 
 function runPhysics(){
 	var p = currentLevel.player;
 	if (p.dead) return;
-	p.canJump = (currentLevel.map[p.j][p.i].type == platform);
+	p.canJump = (currentLevel.def[currentLevel.map[p.j][p.i]].type == platform);
 	if (!p.canJump){
 		desiredJump = false;
 	}
@@ -84,9 +97,7 @@ function runPhysics(){
 		playerFacing = p.moveDirection;
 	}
 	if (p.transitionStepsRemaining > 0){ // Must finish animation
-		p.x = p.previousX + (p.totalTransitionSteps-p.transitionStepsRemaining)*((p.i*tileWidth-p.previousX)/(1.0*p.totalTransitionSteps));
-		p.y = p.previousY + (p.totalTransitionSteps-p.transitionStepsRemaining)*((p.j*tileHeight-p.previousY)/(1.0*p.totalTransitionSteps));
-		p.transitionStepsRemaining -= 1;
+		doPlayerAnimation(p);
 	} else { // Do we need to change anything?
 		// Are we dying?
 		if (p.state == PlayerState.Dying){
@@ -113,6 +124,7 @@ function runPhysics(){
 		} else if (p.state == PlayerState.Crashing){
 			checkForTransition(currentTile, p);
 		}
+		doPlayerAnimation(p);
 	}
 	
 }
