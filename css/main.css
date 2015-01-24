@@ -154,24 +154,25 @@ body{
 }
 
 #btnPlay{
-	margin-top:240px;
+	margin-top:280px;
 	margin-left:auto;
 	margin-right:auto;
 	width:200px;
-	height:80px;
+	height:70px;
 	text-align:center;
-	background-color:black;
+	background-image: url('../img/button.png');
 	border-radius:5px;
 	cursor:pointer;
 	font-size:50px;
-	color:rgb(230,230,230);
+	color:#ebdb2d;
+	text-shadow:0px 0px 25px rgb(197,50,21);
 	border:1px solid black;
-	line-height:80px;
+	line-height:70px;
 }
 
 #btnPlay:hover{
-	color:white;
-	border:1px solid white;
+	color:#ebdb2d;
+	border:1px solid #ebdb2d;
 	text-shadow:0px 0px 25px rgb(197,50,21);
 }
 
@@ -180,17 +181,22 @@ body{
 	margin-left:auto;
 	margin-right:auto;
 	width:200px;
-	height:10px;
+	height:70px;
 	text-align:center;
+	background-image: url('../img/button.png');
+	border-radius:5px;
 	cursor:pointer;
-	font-size:40px;
-	color:black;
-	line-height:10px;
+	font-size:50px;
+	color:#ebdb2d;
+	text-shadow:0px 0px 25px rgb(197,50,21);
+	border:1px solid black;
+	line-height:70px;
 }
 
 #btnCredits:hover{
-	color:white;
-	text-shadow:0px 0px 25px white;
+	color:#ebdb2d;
+	border:1px solid #ebdb2d;
+	text-shadow:0px 0px 25px rgb(197,50,21);
 }
 
 #player{
