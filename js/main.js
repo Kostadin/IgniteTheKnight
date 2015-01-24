@@ -78,7 +78,8 @@ function runGame(){
 		gameFrame++;
 
 		animationFrame = Math.floor(gameFrame / animationRatio);
-		
+		tileAnimationFrame = Math.floor(gameFrame / tileAnimationRatio);
+
 		//Player variables
 		var p = currentLevel.player;
 		//Read player input
@@ -129,9 +130,11 @@ function runGame(){
 		//Tiles
 		for(var i=0;i<currentLevel.tiles.length;++i){
 			var tile = currentLevel.tiles[i];
+			var tileFrameInfo = getTileAnimationFrame(tileAnimationFrame, tile.type);
 			$('#tile_'+i).css({
 				left: (tile.x-screenOriginX)+'px',
 				top: (tile.y-screenOriginY)+'px',
+				'background-position': tileFrameInfo.x + 'px ' + tileFrameInfo.y + 'px',
 				display: ((tileVisible(tile))?'block':'none')
 			});
 		}

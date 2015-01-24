@@ -1,6 +1,9 @@
 var playerRunAnimation = ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png"];
 
 var playerIdleAnimation = ["idle1.png","idle1.png","idle2.png","idle2.png","idle3.png","idle3.png","idle4.png","idle4.png"];
+
+var tileAnimation = ["1.png","2.png"];
+
 /*
 var playerJumpAnimation = ["jump.png"];
 
