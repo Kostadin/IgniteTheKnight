@@ -366,6 +366,13 @@ function shuffle(array) {
 	return array;
 }
 
+var introVideoPlayer = null;
+
+function videoEnd()
+{
+	$(introVideoPlayer).hide();
+}
+
 $(function(){
 	var credits = ['Kostadin Vodenicharov - Dev', 'Neven Iliev - Dev', 'Todor Imreorov -  Graphics' , 'Ilko Birov - Music', 'Veselin Donov - UI, Graphics, Level design'];
 	shuffle(credits);
@@ -374,6 +381,9 @@ $(function(){
 		$('#creditsNames').append('<p>'+credits[i]+'</p>');
 		logstr+=credits[i]+'\n';
 	}
+	introVideoPlayer = document.getElementById('introVideo');
+	introVideoPlayer.addEventListener('ended', videoEnd, false);
+
 	console.log(logstr);
 	$('#btnPlay').click(startGame);
 	$('#credits').click(function(){
