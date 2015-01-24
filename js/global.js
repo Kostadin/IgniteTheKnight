@@ -10,7 +10,15 @@ var levels = [];
 var currentLevel = null;
 var gameRunning = false;
 var muteSound = false;
-var playerFacing = "right";
+var Direction = {
+	Up: 0,
+	Right: 1,
+	Down: 2,
+	Left: 3
+};
+var desiredMoveDirection = null;
+var desiredJump = false;
+var playerFacing = Direction.Right;
 var playerDivOffsetX = 0;
 var playerDivOffsetY = 0;
 var parallaxRatio = 3;
@@ -22,11 +30,13 @@ var animationRatio = 3;
 var lava = 0;
 var platform = 1;
 var portal = 2;
+var wall = 3;
 //Other
 var leftPressed = false;
 var rightPressed = false;
 var upPressed = false;
 var downPressed = false;
+var spacePressed = false;
 var currentTry = 0;
 var maxTries = 3;
 var deadAnimationHandle = null;
@@ -50,5 +60,6 @@ var PlayerState = {
 	Jumping: 3,
 	Crashing: 4,
 	Incapacitated: 5,
-	Dying: 6
+	Dying: 6,
+	Winning: 7
 }

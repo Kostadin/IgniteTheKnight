@@ -27,7 +27,18 @@ function loadLevel(id){
 		x: currentLevel.startPosition[0]*tileWidth,
 		y: currentLevel.startPosition[1]*tileHeight,
 		vel: [0,0],
-		state: PlayerState.Idle//idle, running, jumping, crashing
+		state: PlayerState.Idle,
+		totalTransitionSteps: 0,
+		transitionStepsRemaining: 0,
+		previousX: currentLevel.startPosition[0]*tileWidth,
+		previousY: currentLevel.startPosition[1]*tileHeight,
+		moveDirection: null,
+		resetTransitionStepsTo: function(transitionSteps){
+			this.totalTransitionSteps = transitionSteps;
+			this.transitionStepsRemaining = transitionSteps;
+			this.previousX = this.x;
+			this.previousY = this.y;
+		}
 	};
 	p.dead = false;
 	p.win = false;
@@ -70,6 +81,7 @@ function loadLevel(id){
 	upPressed = false;
 	rightPressed = false;
 	downPressed = false;
+	desiredMoveDirection = null;
 }
 
 function runGame(){
@@ -81,16 +93,7 @@ function runGame(){
 		
 		//Player variables
 		var p = currentLevel.player;
-		//Read player input
-		if (rightPressed){
-			p.vel[0] += maxSideSpeed;
-			playerFacing = "right";
-		} else if (leftPressed){
-			p.vel[0] -= maxSideSpeed;
-			playerFacing = "left";
-		} else {
-			p.vel[0] = 0;
-		}
+		
 		//Process world
 		runPhysics();
 
@@ -107,7 +110,8 @@ function runGame(){
 		});
 
 		//Player
-		if (playerFacing == "right") {
+		if (playerFacing == Direction.Right) {
+			//Must flip image when facing right
 			$('#player').css({
 				left: (p.x-screenOriginX+playerDivOffsetX)+'px',
 				top: (p.y-screenOriginY+playerDivOffsetY)+'px',
@@ -117,7 +121,7 @@ function runGame(){
 			});
 		}
 		else {
-			//Must flip image when facing left
+			// Original orientation when not facing right
 			$('#player').css({
 				left: (p.x-screenOriginX+playerDivOffsetX)+'px',
 				top: (p.y-screenOriginY+playerDivOffsetY)+'px',
@@ -298,7 +302,9 @@ $(function(){
 	});
 	$('body').on('keydown',function(e){
 		var code = e.keyCode;
-		if (code == 37) {
+		if (code == 32){
+			spacePressed = true;
+		} else if (code == 37) {
 			leftPressed = true;
 		} else if (code == 38) {
 			upPressed = true;
@@ -306,6 +312,21 @@ $(function(){
 			rightPressed = true;
 		} else if (code == 40) {
 			downPressed = true;
+		}
+		
+		// Desired move direction
+		if (upPressed){
+			desiredMoveDirection = Direction.Up;
+		} else if (rightPressed){
+			desiredMoveDirection = Direction.Right;
+		} else if (downPressed){
+			desiredMoveDirection = Direction.Down;
+		} else if (leftPressed){
+			desiredMoveDirection = Direction.Left;
+		}
+		// Desired jump
+		if (spacePressed){
+			desiredJump = true;
 		}
 		//M for muting
 		if (e.which == 77 || e.which == 109) {
@@ -325,7 +346,9 @@ $(function(){
 					// Space
 				}
 			}
-			if (code == 37) {
+			if (code == 32){
+				spacePressed = false;
+			} else if (code == 37) {
 				leftPressed = false;
 			} else if (code == 38) {
 				upPressed = false;
@@ -333,7 +356,7 @@ $(function(){
 				rightPressed = false;
 			} else if (code == 40) {
 				downPressed = false;
-			}			else if ((code == 13)&&($('#mainMenu').css('display')=='block')) {
+			} else if ((code == 13)&&($('#mainMenu').css('display')=='block')) {
 				startGame();
 			}
 		});
