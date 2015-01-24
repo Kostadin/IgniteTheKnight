@@ -19,8 +19,8 @@ function getPlayerAnimationFrame(frame, state, direction) {
 	switch (state) {
 		case PlayerState.Running: {
 			var dir = "s";	//left/right
-			if (direction == "up") dir = "b";
-			if (direction == "down") dir = "f";
+			if (direction == Direction.Up) dir = "b";
+			if (direction == Direction.Down) dir = "f";
 			frame = frame % playerRunAnimation.length;
 			var sprite = getSpriteCoords(dir+playerRunAnimation[frame]);
 			var info = {
