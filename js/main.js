@@ -471,11 +471,6 @@ $(function(){
 	setTimeout(function(){
 		$('body').on('keyup',function(e){
 			var code = e.keyCode;
-			if (gameRunning){
-				if (code == 32) {
-					// Space
-				}
-			}
 			if (code == 32){
 				spacePressed = false;
 			} else if (code == 37) {
