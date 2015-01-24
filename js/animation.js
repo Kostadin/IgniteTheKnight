@@ -7,27 +7,31 @@ function getSpriteCoords($xmlData, name) {
 }
 
 function getPlayerAnimationFrame(frame, state, direction) {
+	var dir = "s";	//left/right
+	if (direction == Direction.Up) dir = "b";
+	if (direction == Direction.Down) dir = "f";
+
 	switch (state) {
 		case PlayerState.Running: {
-			var dir = "s";	//left/right
-			if (direction == Direction.Up) dir = "b";
-			if (direction == Direction.Down) dir = "f";
 			frame = frame % playerRunAnimation.length;
-			var sprite = getSpriteCoords($playerXml, dir+playerRunAnimation[frame]);
-			var info = {
-				x: sprite.x,
-				y: sprite.y
-				};
+			return getSpriteCoords($playerXml, dir+playerRunAnimation[frame]);
 			break;
 			}
 		case PlayerState.Idle: {
-			frame = frame % playerIdleAnimation.length;
-			var sprite = getSpriteCoords($playerXml, playerIdleAnimation[frame]);
-			var info = {
-				x: sprite.x,
-				y: sprite.y
-				};
+			frame = frame % playerMiscAnimation.length;
+			return getSpriteCoords($playerXml, "i"+playerMiscAnimation[frame]);
 			break;
+			}
+		case PlayerState.Jumping: {
+			return getSpriteCoords($playerXml, "j"+dir+playerMiscAnimation[0]);
+			break;
+			}
+		case PlayerState.Crashing: {
+			frame = frame % playerMiscAnimation.length;
+			return getSpriteCoords($playerXml, "c"+dir+playerMiscAnimation[frame]);
+			}
+		case PlayerState.Winning: {
+			return getSpriteCoords($playerXml, "gg"+playerMiscAnimation[0]);
 			}
 		default: {
 			var info = {
