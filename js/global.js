@@ -70,3 +70,10 @@ var Items = {
 	Key: 0,
 	Heart: 1
 }
+// Steps
+stepsIdle = 9;
+stepsRunning = 12;
+stepsJumping = 10;
+stepsCrashing = 5;
+stepsDying = 5;
+stepsWinning = 5;
