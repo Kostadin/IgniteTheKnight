@@ -2,15 +2,15 @@
 	def:[
 		{
 			type: lava,
-			texture: "img/Lava.png"
+			texture: "img/tiles/Lava.png"
 		},
 		{
 			type: platform,
-			texture: "img/Platform.png"
+			texture: "img/tiles/Platform.png"
 		},
 		{
 			type: portal,
-			texture: "img/Portal.png"
+			texture: "img/tiles/Portal.png"
 		}
 	],
 	map:[
@@ -26,8 +26,8 @@
 		[0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0]
 	],
 	landmarks:[
-		[5,4,"img/Stalactite.png"],
-		[6,7,"img/Stalagmite.png"]
+		[5,4,"img/landmarks/Stalactite.png"],
+		[6,7,"img/landmarks/Stalagmite.png"]
 	],
 	startPosition: [0,0]
 };
