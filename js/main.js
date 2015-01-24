@@ -43,7 +43,7 @@ function loadLevel(id){
 			if (state == PlayerState.Idle){
 				this.resetTransitionStepsTo(stepsIdle);
 				if (this.state != state){
-					alert('We are idle.');
+					console.log('We are idle.');
 				}
 			} else if (state == PlayerState.Running){
 				this.resetTransitionStepsTo(stepsRunning);
@@ -56,22 +56,22 @@ function loadLevel(id){
 			} else if (state == PlayerState.Crashing){
 				this.resetTransitionStepsTo(stepsCrashing);
 				if (this.state != state){
-					alert('We crashed.');
+					console.log('We crashed.');
 				}
 			} else if (state == PlayerState.Incapacitated){
 				this.resetTransitionStepsTo(stepsIncapacitated);
 				if (this.state != state){
-					alert('We got incapacitated.');
+					console.log('We got incapacitated.');
 				}
 			} else if (state == PlayerState.Dying){
 				this.resetTransitionStepsTo(stepsDying);
 				if (this.state != state){
-					alert('We are dying :(');
+					console.log('We are dying :(');
 				}
 			} else if (state == PlayerState.Winning){
 				this.resetTransitionStepsTo(stepsWinning);
 				if (this.state != state){
-					alert('We are winning!');
+					console.log('We are winning!');
 				}
 			} else {
 				alert('Unknown PlayerState');
