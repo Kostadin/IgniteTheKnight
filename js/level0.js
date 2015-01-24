@@ -2,11 +2,11 @@
 	def:[
 		{
 			type: lava,
-			texture: "img/tiles/sprites.png"
+			texture: "img/sprites/tiles.png"
 		},
 		{
 			type: platform,
-			texture: "img/tiles/sprites.png"
+			texture: "img/sprites/tiles.png"
 		},
 		{
 			type: portal,
