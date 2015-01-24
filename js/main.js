@@ -308,11 +308,11 @@ $(function(){
 		//M for muting
 		if (e.which == 77 || e.which == 109) {
 			muteSound = !muteSound;
-			backgroundTrack.muted = muteSound;
-			wilhelm.muted = muteSound;
-			gameOver.muted = muteSound;
-			playerDeath.muted = muteSound;
-			mainTheme.muted = muteSound;
+			//backgroundTrack.muted = muteSound;
+			//wilhelm.muted = muteSound;
+			//gameOver.muted = muteSound;
+			//playerDeath.muted = muteSound;
+			//mainTheme.muted = muteSound;
 		}
 	});
 	setTimeout(function(){
