@@ -193,7 +193,7 @@ body{
 	width:128px;
 	height:128px;
 	z-index: 5;
-	background-image: url("../img/sprite/sheet.png");
+	background-image: url("../img/sprites/player.png");
 }
 
 .tile, .portal{

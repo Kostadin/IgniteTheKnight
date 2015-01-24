@@ -17,7 +17,7 @@ function getDeathSpriteCoords(name) {
 function getPlayerAnimationFrame(frame, animation, color) {
 // Rework
 return {x:0, y:0};
-/*
+
 	switch (animation) {
 		case "run": {
 			frame = frame % playerRunAnimation.length;
@@ -65,7 +65,6 @@ return {x:0, y:0};
 	}
 		
 	return info;
-*/
 }
 
 

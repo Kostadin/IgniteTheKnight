@@ -146,6 +146,7 @@ function runGame(){
 			clearInterval(runGameHandle);
 			runGameInterval = null;
 			if (p.killed){
+				/* REWORK
 				$('#player').css('background-image','url("img/sprite/deathSheet.png")');
 				currentExplodeFrame = 0;
 				explodeAnimationHandle = setInterval(function(){
@@ -163,7 +164,7 @@ function runGame(){
 						clearInterval(explodeAnimationHandle);
 						explodeAnimationHandle = null;
 					}
-				},(deathDelayMS - 60) / (Math.round(fps / 2)));
+				},(deathDelayMS - 60) / (Math.round(fps / 2)));*/
 			}
 			deadAnimationHandle = setTimeout(function(){
 				++currentTry;
