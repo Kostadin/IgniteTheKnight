@@ -272,6 +272,7 @@ function runGame(){
 						$('#mainMenu').show();
 						mainTheme.currentTime = 0;
 						mainTheme.play();
+						titleVideoPlayer.play();
 						gameOver.pause();
 					},gameOverDelayMS);
 				} else {
@@ -317,6 +318,7 @@ function runGame(){
 						$('#mainMenu').show();
 						mainTheme.currentTime = 0;
 						mainTheme.play();
+						titleVideoPlayer.play();
 					},youWinDelayMS);
 				}
 				winAnimationHandle = null;
@@ -332,8 +334,8 @@ function startGame(){
 	if (!gameRunning){
 		currentTry = 0;
 		currentLevelIndex = 0;
-		titleVideoPlayer.stop();
-		$(titleVideoPlayer).hide();
+		titleVideoPlayer.pause();
+		
 		$('#levelNumber').html(currentLevelIndex+1);
 		$('#mainMenu').hide();
 		mainTheme.pause();
@@ -368,9 +370,6 @@ function shuffle(array) {
 	return array;
 }
 
-var introVideoPlayer = null;
-var titleVideoPlayer = null;
-
 function introVideoEnd()
 {
 	$(introVideoPlayer).hide();
@@ -385,6 +384,10 @@ function titleVideoEnd()
 	{
 		titleVideoPlayer.currentTime = 0;
 		titleVideoPlayer.play();
+	}
+	else
+	{
+		//$(titleVideoPlayer).hide();
 	}
 }
 

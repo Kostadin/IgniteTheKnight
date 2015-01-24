@@ -55,6 +55,8 @@ var transitionScreenDelayMS = 3000;
 var gameOverDelayMS = 3200;
 var youWinDelayMS = 3000;
 var opacityTransitionPerFrame = 0.10;
+var introVideoPlayer = null;
+var titleVideoPlayer = null;
 
 var PlayerState = {
 	Idle: 1,
