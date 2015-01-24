@@ -26,7 +26,8 @@ function loadLevel(id){
 		j: currentLevel.startPosition[1],
 		x: currentLevel.startPosition[0]*tileWidth,
 		y: currentLevel.startPosition[1]*tileHeight,
-		vel: [0,0]
+		vel: [0,0],
+		state: "running"//idle, running, jumping, crashing
 	};
 	p.dead = false;
 	p.win = false;
