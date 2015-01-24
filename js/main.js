@@ -42,6 +42,9 @@ function loadLevel(id){
 		transitionStateTo: function(state){
 			if (state == PlayerState.Idle){
 				this.resetTransitionStepsTo(5);
+				if (this.state != state){
+					//alert('We are idle.');
+				}
 			} else if (state == PlayerState.Running){
 				this.resetTransitionStepsTo(15);
 			} else if (state == PlayerState.Jumping){

@@ -20,7 +20,7 @@ function collision(p,t){
 }
 
 function checkForTransition(currentTile, p){
-	if (desiredMoveDirection != p.moveDirection){
+	if ((desiredMoveDirection != p.moveDirection)&&(p.state != PlayerState.Jumping)){
 		if (p.transitionStepsRemaining == 0){
 			p.moveDirection = desiredMoveDirection;
 		}
@@ -39,22 +39,23 @@ function checkForTransition(currentTile, p){
 	}
 	if (currentTile.type == portal){
 		p.transitionStateTo(PlayerState.Winning);
-	}else if ((nextJ<0)||(nextJ>=currentLevel.map.length)||(nextI<0)||(nextI>=currentLevel.map[0].length)){
+	} else if (currentTile.type == lava){
+		if (p.state != PlayerState.Jumping){
+			console.log("Pre-transition:");
+			console.log(currentTile);
+			console.log(p);
+			p.transitionStateTo(PlayerState.Dying);
+			console.log("Post-transition:");
+			console.log(currentTile);
+			console.log(p);
+			return;
+		}
+	}
+	
+	if ((nextJ<0)||(nextJ>=currentLevel.map.length)||(nextI<0)||(nextI>=currentLevel.map[0].length)){
 		p.moveDirection = null;
 		p.transitionStateTo(PlayerState.Idle);
-	} else {
-		if (currentTile.type == lava){
-			if (p.state != PlayerState.Jumping){
-				console.log("Pre-transition:");
-				console.log(currentTile);
-				console.log(p);
-				p.transitionStateTo(PlayerState.Dying);
-				console.log("Post-transition:");
-				console.log(currentTile);
-				console.log(p);
-				return;
-			}
-		} 
+	} else { 
 		
 		var nextTile = currentLevel.tiles[nextJ*currentLevel.map[0].length + nextI];
 		if (currentTile != nextTile){
