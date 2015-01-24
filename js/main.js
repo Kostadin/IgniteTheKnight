@@ -52,12 +52,24 @@ function loadLevel(id){
 				}
 			} else if (state == PlayerState.Crashing){
 				this.resetTransitionStepsTo(5);
+				if (this.state != state){
+					alert('We crashed.');
+				}
 			} else if (state == PlayerState.Incapacitated){
 				this.resetTransitionStepsTo(5);
+				if (this.state != state){
+					alert('We got incapacitated.');
+				}
 			} else if (state == PlayerState.Dying){
 				this.resetTransitionStepsTo(5);
+				if (this.state != state){
+					alert('We are dying :(');
+				}
 			} else if (state == PlayerState.Winning){
 				this.resetTransitionStepsTo(5);
+				if (this.state != state){
+					alert('We are winning!');
+				}
 			} else {
 				alert('Unknown PlayerState');
 			}

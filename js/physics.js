@@ -39,7 +39,6 @@ function checkForTransition(currentTile, p){
 	}
 	if (currentTile.type == portal){
 		p.transitionStateTo(PlayerState.Winning);
-		alert('We are winning!');
 	}else if ((nextJ<0)||(nextJ>=currentLevel.map.length)||(nextI<0)||(nextI>=currentLevel.map[0].length)){
 		p.moveDirection = null;
 		p.transitionStateTo(PlayerState.Idle);
@@ -49,7 +48,6 @@ function checkForTransition(currentTile, p){
 				console.log("Pre-transition:");
 				console.log(currentTile);
 				console.log(p);
-				alert('We are dying :(');
 				p.transitionStateTo(PlayerState.Dying);
 				console.log("Post-transition:");
 				console.log(currentTile);
@@ -61,7 +59,7 @@ function checkForTransition(currentTile, p){
 		var nextTile = currentLevel.tiles[nextJ*currentLevel.map[0].length + nextI];
 		if (currentTile != nextTile){
 			if (nextTile.type == wall){
-				p.transitionStateTo(PlayerState.Crashing);
+				p.transitionStateTo(PlayerState.Crashing);//Or incapacitated here....
 				p.moveDirection = null;
 			} else {
 				if (p.canJump && desiredJump){
