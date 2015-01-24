@@ -33,9 +33,9 @@ function loadLevel(id){
 	p.win = false;
 	currentLevel.player = p;
 	var tiles = [];
-	for(var i=0;i<currentLevel.map.length;++i){
-		for(var j=0;j<currentLevel.map[i].length;++j){
-			tileDef = currentLevel.def[currentLevel.map[i][j]];
+	for(var j=0;j<currentLevel.map.length;++j){
+		for(var i=0;i<currentLevel.map[j].length;++i){
+			tileDef = currentLevel.def[currentLevel.map[j][i]];
 			tiles.push({
 				type: tileDef.type,
 				x: i*tileWidth,
@@ -47,8 +47,8 @@ function loadLevel(id){
 		}
 	}
 	currentLevel.tiles = tiles;
-	currentLevel.width = tileWidth*currentLevel.map.length;
-	currentLevel.height = tileHeight*currentLevel.map[0].length;
+	currentLevel.height = tileHeight*currentLevel.map.length;
+	currentLevel.width = tileWidth*currentLevel.map[0].length;
 	setScreenOrigin(currentLevel);
 	$('#level').html('');
 
