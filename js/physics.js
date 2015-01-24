@@ -37,39 +37,33 @@ function checkForTransition(currentTile, p){
 	} else if (p.moveDirection == Direction.Left){
 		nextI -= 1;
 	}
-	if ((nextJ<0)||(nextJ>=currentLevel.map.length)||(nextI<0)||(nextI>=currentLevel.map[0].length)){
+	if (currentTile.type == portal){
+		p.transitionStateTo(PlayerState.Winning);
+		alert('We are winning!');
+	}else if ((nextJ<0)||(nextJ>=currentLevel.map.length)||(nextI<0)||(nextI>=currentLevel.map[0].length)){
 		p.moveDirection = null;
-		p.state = PlayerState.Idle;
-		p.resetTransitionStepsTo(5);
+		p.transitionStateTo(PlayerState.Idle);
 	} else {
 		if (currentTile.type == lava){
 			if (p.state != PlayerState.Jumping){
-				p.resetTransitionStepsTo(5);
-				p.state = PlayerState.Dying;
+				p.transitionStateTo(PlayerState.Dying);
 				console.log(currentTile);
 				console.log(p);
-				alert('We are dying :(');
+				//alert('We are dying :(');
 			} else {
 				
 			}
-		} else if (currentTile.type == portal){
-			p.resetTransitionStepsTo(5);
-			p.state = PlayerState.Winning;
-			alert('We are winning!');
 		} else {
 			var nextTile = currentLevel.tiles[nextJ*currentLevel.map[0].length + nextI];
 			if (currentTile != nextTile){
 				if (nextTile.type == wall){
-					p.resetTransitionStepsTo(5);
-					p.state = PlayerState.Crashing;
+					p.transitionStateTo(PlayerState.Crashing);
 					p.moveDirection = null;
 				} else {
 					if (p.canJump && desiredJump){
-						p.resetTransitionStepsTo(5);
-						p.state = PlayerState.Jumping;
+						p.transitionStateTo(PlayerState.Jumping);
 					} else {
-						p.resetTransitionStepsTo(5);
-						p.state = PlayerState.Running;
+						p.transitionStateTo(PlayerState.Running);
 						p.i = nextI;
 						p.j = nextJ;
 					}
@@ -104,7 +98,7 @@ function runPhysics(){
 			return;
 		}
 		if (p.state == PlayerState.Incapacitated){
-			p.resetTransitionStepsTo(5);
+			p.transitionStateTo(PlayerState.Incapacitated);
 			return;
 		}
 		var currentI = p.i;

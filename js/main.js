@@ -38,6 +38,26 @@ function loadLevel(id){
 			this.transitionStepsRemaining = transitionSteps;
 			this.previousX = this.x;
 			this.previousY = this.y;
+		},
+		transitionStateTo: function(state){
+			if (state == PlayerState.Idle){
+				this.resetTransitionStepsTo(5);
+			} else if (state == PlayerState.Running){
+				this.resetTransitionStepsTo(15);
+			} else if (state == PlayerState.Jumping){
+				this.resetTransitionStepsTo(15);
+			} else if (state == PlayerState.Crashing){
+				this.resetTransitionStepsTo(5);
+			} else if (state == PlayerState.Incapacitated){
+				this.resetTransitionStepsTo(5);
+			} else if (state == PlayerState.Dying){
+				this.resetTransitionStepsTo(5);
+			} else if (state == PlayerState.Winning){
+				this.resetTransitionStepsTo(5);
+			} else {
+				alert('Unknown PlayerState');
+			}
+			this.state = state;
 		}
 	};
 	p.dead = false;
