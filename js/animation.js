@@ -13,7 +13,7 @@ function getPlayerAnimationFrame(frame, state, direction) {
 			if (direction == Direction.Up) dir = "b";
 			if (direction == Direction.Down) dir = "f";
 			frame = frame % playerRunAnimation.length;
-			var sprite = getSpriteCoords($spriteXml, dir+playerRunAnimation[frame]);
+			var sprite = getSpriteCoords($playerXml, dir+playerRunAnimation[frame]);
 			var info = {
 				x: sprite.x,
 				y: sprite.y
@@ -22,7 +22,7 @@ function getPlayerAnimationFrame(frame, state, direction) {
 			}
 		case PlayerState.Idle: {
 			frame = frame % playerIdleAnimation.length;
-			var sprite = getSpriteCoords($spriteXml, playerIdleAnimation[frame]);
+			var sprite = getSpriteCoords($playerXml, playerIdleAnimation[frame]);
 			var info = {
 				x: sprite.x,
 				y: sprite.y

@@ -41,35 +41,35 @@ function loadLevel(id){
 		},
 		transitionStateTo: function(state){
 			if (state == PlayerState.Idle){
-				this.resetTransitionStepsTo(5);
+				this.resetTransitionStepsTo(stepsIdle);
 				if (this.state != state){
-					//alert('We are idle.');
+					alert('We are idle.');
 				}
 			} else if (state == PlayerState.Running){
-				this.resetTransitionStepsTo(15);
+				this.resetTransitionStepsTo(stepsRunning);
 			} else if (state == PlayerState.Jumping){
-				this.resetTransitionStepsTo(15);
+				this.resetTransitionStepsTo(stepsJumping);
 				if (this.state != state){
 					desiredJump = false;
 					console.log("I don't want to jump anymore.");
 				}
 			} else if (state == PlayerState.Crashing){
-				this.resetTransitionStepsTo(5);
+				this.resetTransitionStepsTo(stepsCrashing);
 				if (this.state != state){
 					alert('We crashed.');
 				}
 			} else if (state == PlayerState.Incapacitated){
-				this.resetTransitionStepsTo(5);
+				this.resetTransitionStepsTo(stepsIncapacitated);
 				if (this.state != state){
 					alert('We got incapacitated.');
 				}
 			} else if (state == PlayerState.Dying){
-				this.resetTransitionStepsTo(5);
+				this.resetTransitionStepsTo(stepsDying);
 				if (this.state != state){
 					alert('We are dying :(');
 				}
 			} else if (state == PlayerState.Winning){
-				this.resetTransitionStepsTo(5);
+				this.resetTransitionStepsTo(stepsWinning);
 				if (this.state != state){
 					alert('We are winning!');
 				}
@@ -92,7 +92,8 @@ function loadLevel(id){
 				y: j*tileHeight,
 				width: tileWidth,
 				height: tileHeight,
-				texture: tileDef.texture
+				texture: tileDef.texture,
+				breaking: null
 			});
 		}
 	}
@@ -196,6 +197,13 @@ function runGame(){
 		//Tiles
 		for(var i=0;i<currentLevel.tiles.length;++i){
 			var tile = currentLevel.tiles[i];
+			if ((tile.breaking)&&(tile.breaking<=0)){
+				$('#tile_'+i).css({
+					'background-image': 'url(\''+tile.texture+'\')'
+				});
+				tile.breaking = null;
+				//console.log('#tile_'+i+' got broken.');
+			}
 			var tileFrameInfo = getTileAnimationFrame(tileAnimationFrame, tile.type);
 			$('#tile_'+i).css({
 				left: (tile.x-screenOriginX)+'px',
@@ -203,6 +211,7 @@ function runGame(){
 				'background-position': tileFrameInfo.x + 'px ' + tileFrameInfo.y + 'px',
 				display: ((tileVisible(tile))?'block':'none')
 			});
+			
 		}
 		//Items (pickups)
 		for (var i=0;i<currentLevel.items.length;++i)

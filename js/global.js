@@ -25,7 +25,7 @@ var parallaxRatio = 3;
 //Animation counter
 var animationFrame = 0;
 var gameFrame = 0;
-var animationRatio = 3;
+var animationRatio = 1;
 var tileAnimationFrame = 0;
 var tileAnimationRatio = 45;
 var itemAnimationFrame = 0;
@@ -70,3 +70,10 @@ var Items = {
 	Key: 0,
 	Heart: 1
 }
+// Steps
+stepsIdle = 9;
+stepsRunning = 12;
+stepsJumping = 10;
+stepsCrashing = 5;
+stepsDying = 5;
+stepsWinning = 5;
