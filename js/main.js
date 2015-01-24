@@ -169,16 +169,24 @@ function runGame(){
 		//Display
 		
 		//Background parallax
-		$('#level').css({
-			'background-position': (-screenOriginX / parallaxRatio) + 'px ' + '0px , 0px 0px',
-		});
-
+		//$('#level').css({
+		//	'background-position': (-screenOriginX / parallaxRatio) + 'px ' + '0px , 0px 0px',
+		//});
+		
+		var totalOffsetX = playerDivOffsetX;
+		var totalOffsetY = playerDivOffsetY;
+		if (p.state == PlayerState.Jumping)
+		{
+			totalOffsetX += playerJumpingOffsetX;
+			totalOffsetY += playerJumpingOffsetY;
+		}
+		
 		//Player
 		if (playerFacing == Direction.Right) {
 			//Must flip image when facing right
 			$('#player').css({
-				left: (p.x-screenOriginX+playerDivOffsetX)+'px',
-				top: (p.y-screenOriginY+playerDivOffsetY)+'px',
+				left: (p.x-screenOriginX+totalOffsetX)+'px',
+				top: (p.y-screenOriginY+totalOffsetY)+'px',
 				'background-position': playerFrameInfo.x + 'px ' + playerFrameInfo.y + 'px',
 				'transform-origin': '50% 50%',
 				transform: 'scaleX(-1)'
@@ -187,8 +195,8 @@ function runGame(){
 		else {
 			// Original orientation when not facing right
 			$('#player').css({
-				left: (p.x-screenOriginX+playerDivOffsetX)+'px',
-				top: (p.y-screenOriginY+playerDivOffsetY)+'px',
+				left: (p.x-screenOriginX+totalOffsetX)+'px',
+				top: (p.y-screenOriginY+totalOffsetY)+'px',
 				'background-position': playerFrameInfo.x + 'px ' + playerFrameInfo.y + 'px',
 				'transform-origin': '50% 50%',
 				transform: 'scaleX(1)'

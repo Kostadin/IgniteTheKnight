@@ -21,6 +21,8 @@ var desiredJump = false;
 var playerFacing = Direction.Right;
 var playerDivOffsetX = 0;
 var playerDivOffsetY = -25;
+var playerJumpingOffsetX = 0;
+var playerJumpingOffsetY = -25;
 var parallaxRatio = 3;
 //Animation counter
 var animationFrame = 0;
