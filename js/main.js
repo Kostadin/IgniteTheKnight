@@ -165,7 +165,8 @@ function runGame(){
 		for (var i=0;i<currentLevel.items.length;++i)
 		{
 			var item = currentLevel.items[i];
-			var itemFrameInfo = getGenericAnimationFrame(itemAnimationFrame, itemAnimationTotalFrames, $keyXml);
+			var $xml = (item.type == Items.Key ? $keyXml : $heartXml);
+			var itemFrameInfo = getGenericAnimationFrame(itemAnimationFrame, itemAnimationTotalFrames, $xml);
 			$('#item_'+i).css({
 				left: (item.x-screenOriginX)+'px',
 				top: (item.y-screenOriginY)+'px',
