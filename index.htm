@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Ignite the Knight</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+	<script type="text/javascript" src="js/global.js"></script>
+	<script type="text/javascript" src="js/animationSettings.js"></script>
+	<script type="text/javascript" src="js/animation.js"></script>
+	<script type="text/javascript" src="js/sounds.js"></script>
+	<script type="text/javascript" src="js/physics.js"></script>
+	<script type="text/javascript" src="js/level0.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+	<div id="container">
+		<div id="screen">
+			<div id="mainMenu" style="display:block;">
+				<div id="logo">Ignite the Knight</div>
+				<div id="btnPlay">Play</div>
+				<div id="btnCredits">Credits</div>
+			</div>
+			<div id="credits" class="gameScreen" style="display:none;">
+				<div id="creditsTitle">
+					Credits
+				</div>
+				<div id="creditsNames">
+				</div>
+			</div>
+			<div id="transition" class="gameScreen" style="display:none;">
+				Level <span id="levelNumber"></span>
+				<div id="instructions">
+					<p id="controls">
+						CONTROLS<br/>
+						Spacebar - Jump<br/>
+						Arrow keys - Move<br/>
+						M - Toggle sound<br/>
+					</p>
+				</div>
+			</div>
+			<div id="level" class="gameScreen" style="display:none;">
+			</div>
+			<div id="gameOver" class="gameScreen" style="display:none;">
+				Game Over
+			</div>
+			<div id="youWin" style="display:none;">
+				YOU WIN
+			</div>
+			<div id="curtainLeft"></div>
+			<div id="curtainRight">
+				<div id="debug">
+				</div>
+			</div>
+			<div id="curtainBottom"></div>
+		</div>
+	</div>
+</body>
+</html>
