@@ -201,6 +201,11 @@ body{
 	z-index: 2;
 }
 
+.item{
+	position:absolute;
+	z-index: 4;
+}
+
 .portal {
 	background-image: url("../img/bg/portal.png");
 	background-repeat: no-repeat;

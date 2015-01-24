@@ -21,7 +21,8 @@ var animationRatio = 3;
 var tileAnimationFrame = 0;
 var tileAnimationRatio = 45;
 var itemAnimationFrame = 0;
-var itemAnimationRatio = 2.5;
+var itemAnimationRatio = 2;
+var itemAnimationTotalFrames = 24;
 //Brick types
 var lava = 0;
 var platform = 1;
@@ -52,4 +53,9 @@ var PlayerState = {
 	Crashing: 4,
 	Incapacitated: 5,
 	Dying: 6
+}
+
+var Items = {
+	Key: 0,
+	Heart: 1
 }

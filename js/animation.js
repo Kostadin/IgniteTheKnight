@@ -1,14 +1,9 @@
 function getSpriteCoords($xmlData, name) {
 	var $st = $xmlData.find('SubTexture[name="' + name + '"]');
-	if ($st)
-	{	
-		return {
-			x: -parseInt($st.attr('x')), 
-			y: -parseInt($st.attr('y'))
-		};
-	}
-	
-	return {x: 0, y: 0};
+	return {
+		x: -parseInt($st.attr('x')), 
+		y: -parseInt($st.attr('y'))
+	};
 }
 
 function getPlayerAnimationFrame(frame, state, direction) {
@@ -78,15 +73,9 @@ function getTileAnimationFrame(frame, type) {
 	return info;
 }
 
-getGenericAnimationFrame(frame, totalAnimationFrames, $xml)
+function getGenericAnimationFrame(frame, totalAnimationFrames, $xml)
 {
 	frame = frame % totalAnimationFrames;
 	
-	var sprite = getSpriteCoords($xml, frame + ".png");
-	var info = {
-		x: sprite.x,
-		y: sprite.y
-	};
-
-	return info;
+	return getSpriteCoords($xml, frame + ".png");
 }
