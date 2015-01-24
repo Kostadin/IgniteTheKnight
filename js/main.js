@@ -27,7 +27,7 @@ function loadLevel(id){
 		x: currentLevel.startPosition[0]*tileWidth,
 		y: currentLevel.startPosition[1]*tileHeight,
 		vel: [0,0],
-		state: "idle"//idle, running, jumping, crashing
+		state: PlayerState.Run//idle, running, jumping, crashing
 	};
 	p.dead = false;
 	p.win = false;
@@ -81,22 +81,20 @@ function runGame(){
 		
 		//Player variables
 		var p = currentLevel.player;
-		var animationType = "idle";
 		//Read player input
 		if (rightPressed){
 			p.vel[0] += maxSideSpeed;
-			animationType = "run";
 			playerFacing = "right";
 		} else if (leftPressed){
 			p.vel[0] -= maxSideSpeed;
-			animationType = "run";
 			playerFacing = "left";
 		} else {
 			p.vel[0] = 0;
 		}
 		//Process world
 		runPhysics();
-		var playerFrameInfo = getPlayerAnimationFrame(animationFrame, animationType, p.vel);
+
+		var playerFrameInfo = getPlayerAnimationFrame(animationFrame, p.state, playerFacing);
 		
 		
 		setScreenOrigin(currentLevel);
