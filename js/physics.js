@@ -39,15 +39,16 @@ function checkForTransition(currentTile, p){
 	}
 	if (currentTile.type == portal){
 		p.transitionStateTo(PlayerState.Winning);
+		return;
 	} else if (currentTile.type == lava){
 		if (p.state != PlayerState.Jumping){
-			console.log("Pre-transition:");
-			console.log(currentTile);
-			console.log(p);
+			//console.log("Pre-transition:");
+			//console.log(currentTile);
+			//console.log(p);
 			p.transitionStateTo(PlayerState.Dying);
-			console.log("Post-transition:");
-			console.log(currentTile);
-			console.log(p);
+			//console.log("Post-transition:");
+			//console.log(currentTile);
+			//console.log(p);
 			return;
 		}
 	}
@@ -60,7 +61,7 @@ function checkForTransition(currentTile, p){
 		var nextTile = currentLevel.tiles[nextJ*currentLevel.map[0].length + nextI];
 		if (currentTile != nextTile){
 			if (nextTile.type == wall){
-				p.transitionStateTo(PlayerState.Crashing);//Or incapacitated here....
+				p.transitionStateTo(PlayerState.Crashing);//Or incapacitated here ...
 				p.moveDirection = null;
 			} else {
 				if (p.canJump && desiredJump){
@@ -88,6 +89,28 @@ function doPlayerAnimation(p){
 function runPhysics(){
 	var p = currentLevel.player;
 	if (p.dead) return;
+	var lavaDef = null;
+	for (var i=0;i<currentLevel.def.length;++i){
+		def = currentLevel.def[i];
+		if (def.type == lava){
+			lavaDef = def;
+			break;
+		}
+	}
+	for (var i=0;i<currentLevel.tiles.length;++i){
+		var tile = currentLevel.tiles[i];
+		if (tile.type == platform){
+			if (tile.breaking != null){
+				if (tile.breaking > 0){
+					tile.breaking -= 1;
+				} else {
+					// Transform to lava tile
+					tile.type = lavaDef.type;
+					tile.texture = lavaDef.texture;
+				}
+			}
+		}
+	}
 	p.canJump = (currentLevel.def[currentLevel.map[p.j][p.i]].type == platform);
 	if (!p.canJump){
 		desiredJump = false;
@@ -114,6 +137,12 @@ function runPhysics(){
 		var currentI = p.i;
 		var currentJ = p.j;
 		var currentTile = currentLevel.tiles[currentJ*currentLevel.map[0].length + currentI];
+		if (currentTile.type == platform){
+			if (currentTile.breaking == null){
+				currentTile.breaking = 60;
+				//console.log('A tile started breaking...');
+			}
+		}
 		if (p.state == PlayerState.Idle){
 			checkForTransition(currentTile, p);
 		} else if (p.state == PlayerState.Running){

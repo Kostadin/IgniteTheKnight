@@ -43,7 +43,7 @@ function loadLevel(id){
 			if (state == PlayerState.Idle){
 				this.resetTransitionStepsTo(5);
 				if (this.state != state){
-					//alert('We are idle.');
+					alert('We are idle.');
 				}
 			} else if (state == PlayerState.Running){
 				this.resetTransitionStepsTo(15);
@@ -92,7 +92,8 @@ function loadLevel(id){
 				y: j*tileHeight,
 				width: tileWidth,
 				height: tileHeight,
-				texture: tileDef.texture
+				texture: tileDef.texture,
+				breaking: null
 			});
 		}
 	}
@@ -196,6 +197,13 @@ function runGame(){
 		//Tiles
 		for(var i=0;i<currentLevel.tiles.length;++i){
 			var tile = currentLevel.tiles[i];
+			if ((tile.breaking)&&(tile.breaking<=0)){
+				$('#tile_'+i).css({
+					'background-image': 'url(\''+tile.texture+'\')'
+				});
+				tile.breaking = null;
+				//console.log('#tile_'+i+' got broken.');
+			}
 			var tileFrameInfo = getTileAnimationFrame(tileAnimationFrame, tile.type);
 			$('#tile_'+i).css({
 				left: (tile.x-screenOriginX)+'px',
@@ -203,6 +211,7 @@ function runGame(){
 				'background-position': tileFrameInfo.x + 'px ' + tileFrameInfo.y + 'px',
 				display: ((tileVisible(tile))?'block':'none')
 			});
+			
 		}
 		//Items (pickups)
 		for (var i=0;i<currentLevel.items.length;++i)
