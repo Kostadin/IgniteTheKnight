@@ -17,7 +17,7 @@ function getDeathSpriteCoords(name) {
 function getPlayerAnimationFrame(frame, state, direction) {
 // Rework
 	switch (state) {
-		case PlayerState.Run: {
+		case PlayerState.Running: {
 			var dir = "s";	//left/right
 			if (direction == "up") dir = "b";
 			if (direction == "down") dir = "f";

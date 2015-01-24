@@ -45,6 +45,10 @@ var $envXml = $('');
 var $deathXml = $('');
 
 var PlayerState = {
-	Run: 1,
-	Idle: 2
+	Idle: 1,
+	Running: 2,
+	Jumping: 3,
+	Crashing: 4,
+	Incapacitated: 5,
+	Dying: 6
 }
