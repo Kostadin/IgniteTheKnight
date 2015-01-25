@@ -38,7 +38,7 @@
 		},
 		{//9
 			type: wall,
-			texture: "img/tiles/filter1.png"
+			texture: "img/tiles/filler1.png"
 		},
 	],
 	map:[

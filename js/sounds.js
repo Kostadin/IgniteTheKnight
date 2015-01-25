@@ -7,6 +7,8 @@ backgroundTrack.addEventListener('ended', function() {
     this.play();
 }, false);
 
+backgroundTrack.volume = 0.4;
+
 var wilhelm = new Audio("audio/blank.mp3");
 
 var gameOver = new Audio("audio/game_over_2015.mp3");
@@ -16,6 +18,13 @@ var playerDeath = new Audio("audio/blank.mp3");
 var mainTheme = new Audio("audio/Title_-_welcome_to_hell.mp3");
 
 mainTheme.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+}, false);
+
+var creditsTheme = new Audio("audio/no_more_lava.mp3");
+
+creditsTheme.addEventListener('ended', function() {
     this.currentTime = 0;
     this.play();
 }, false);

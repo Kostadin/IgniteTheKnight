@@ -481,12 +481,14 @@ $(function(){
 	$('#credits').click(function(){
 		$('#credits').hide();
 		$('#mainMenu').show();
+		creditsTheme.pause();
 		mainTheme.currentTime = 0;
 		mainTheme.play();
 	});
 	$('#btnCredits').click(function(){
 		$('#mainMenu').hide();
 		mainTheme.pause();
+		creditsTheme.play();
 		$('#credits').show();
 	});
 	$('body').on('keydown',function(e){
