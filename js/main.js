@@ -464,7 +464,7 @@ function titleVideoEnd()
 }
 
 $(function(){
-	var credits = ['Kostadin Vodenicharov - Dev', 'Neven Iliev - Dev', 'Todor Imreorov -  Graphics' , 'Ilko Birov - Music', 'Veselin Donov - UI, Graphics, Level design'];
+	var credits = ['Kostadin Vodenicharov - Dev', 'Neven Iliev - Dev', 'Todor Imreorov -  Animator, Environment Art' , 'Ilko Birov - Music, SFX', 'Veselin Donov - UI, Visual FX, Level design'];
 	shuffle(credits);
 	var logstr = 'Credits\n-------\n';
 	for (var i=0;i<credits.length;++i){
