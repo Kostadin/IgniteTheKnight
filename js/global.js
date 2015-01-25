@@ -29,7 +29,7 @@ var animationFrame = 0;
 var gameFrame = 0;
 var animationRatio = 1;
 var tileAnimationFrame = 0;
-var tileAnimationRatio = 45;
+var tileAnimationRatio = 15;
 var itemAnimationFrame = 0;
 var itemAnimationRatio = 2;
 var itemAnimationTotalFrames = 24;
@@ -61,6 +61,8 @@ var youWinDelayMS = 3000;
 var opacityTransitionPerFrame = 0.10;
 var introVideoPlayer = null;
 var titleVideoPlayer = null;
+var tileBreakMinor = 45;
+var tileBreakMajor = 15;
 
 var PlayerState = {
 	Idle: 1,
