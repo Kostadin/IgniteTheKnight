@@ -43,7 +43,7 @@
 		{//10
 			type: wall,
 			texture: "img/tiles/upRightWall.png"
-		},
+		}
 	],
 	map:[
 		[7,7,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],

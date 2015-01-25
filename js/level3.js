@@ -40,7 +40,7 @@
 			type: wall,
 			texture: "img/tiles/filler3.png"
 		},
-{//10
+		{//10
 			type: wall,
 			texture: "img/tiles/filler4.png"
 		},
@@ -99,7 +99,7 @@
 			type: wall,
 			texture: "img/tiles/topWall.png"
 		},
-{//25
+		{//25
 			type: wall,
 			texture: "img/tiles/wall1c2.png"
 		},
