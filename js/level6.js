@@ -80,6 +80,10 @@
 			type: wall,
 			texture: "img/tiles/floor3.png"
 		},
+		{//20
+			type: wall,
+			texture: "img/tiles/lava1.png"
+		},
 	],
 	map:[
 		[3,1,1,1,0,0,0,1,1,1,1,3,3,3,3,3,3,1,3],
