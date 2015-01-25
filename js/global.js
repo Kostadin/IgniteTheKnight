@@ -62,7 +62,8 @@ var opacityTransitionPerFrame = 0.10;
 var introVideoPlayer = null;
 var titleVideoPlayer = null;
 var tileBreakMinor = 45;
-var tileBreakMajor = 15;
+var tileBreakMajor = 30;
+var tileBreakSevere = 15;
 
 var PlayerState = {
 	Idle: 1,

@@ -264,7 +264,7 @@ function runGame(){
 					$('#tile_'+i).css({
 					'background-image': 'url(\'img/tiles/breaktile'+tile.brokenStage+'.png\')',
 					'background-position':'0px 0px'
-				});
+					});
 				}
 			} else {
 				var tileFrameInfo = getTileAnimationFrame(tileAnimationFrame, tile.type);

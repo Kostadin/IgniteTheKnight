@@ -107,8 +107,9 @@ function runPhysics(){
 			if (tile.breaking != null){
 				if (tile.breaking > 0){
 					tile.breaking -= 1;
-					if (tile.breaking < tileBreakMinor) tile.brokenStage = 1;
-					if (tile.breaking < tileBreakMajor) tile.brokenStage = 2;
+					if (tile.breaking <= tileBreakSevere) tile.brokenStage = 3;
+					else if (tile.breaking <= tileBreakMajor) tile.brokenStage = 2;
+					else if (tile.breaking <= tileBreakMinor) tile.brokenStage = 1;
 				} 
 				if (tile.breaking === 0){
 					// Transform to lava tile
