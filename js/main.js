@@ -102,6 +102,7 @@ function loadLevel(id){
 			} else if (state == PlayerState.Dying){
 				this.resetTransitionStepsTo(stepsDying);
 				if (this.state != state){
+					playerDyingFrame = 0;
 					console.log('We are dying :(');
 				}
 			} else if (state == PlayerState.Winning){
@@ -299,26 +300,25 @@ function runGame(){
 			gameRunning = false;
 			clearInterval(runGameHandle);
 			runGameInterval = null;
-			if (p.killed){
-				/* REWORK
-				$('#player').css('background-image','url("img/sprite/deathSheet.png")');
-				currentExplodeFrame = 0;
-				explodeAnimationHandle = setInterval(function(){
-					if (currentExplodeFrame < playerDeathAnimation.length){
-						var playerDeathFrameInfo = getPlayerDeathAnimationFrame(currentExplodeFrame);
+			if (p.state == PlayerState.Dying){
+				playerDyingFrame = 0;
+				deathAnimationHandle = setInterval(function(){
+					if (playerDyingFrame < playerDeathAnimation.length){
+						var playerDeathFrameInfo = getPlayerAnimationFrame(0, PlayerState.Dying);
 						
 						$('#player').css( 'background-position', playerDeathFrameInfo.x + 'px ' + playerDeathFrameInfo.y + 'px');
+						/*
 						if (currentExplodeFrame == 5) {
 							playerDeath.currentTime = 0;
 							playerDeath.play();
-						}
-						currentExplodeFrame++;
+						}*/
+						playerDyingFrame++;
 					} else {
-						playerDeath.pause();
-						clearInterval(explodeAnimationHandle);
-						explodeAnimationHandle = null;
+						//playerDeath.pause();
+						clearInterval(deathAnimationHandle);
+						deathAnimationHandle = null;
 					}
-				},(deathDelayMS - 60) / (Math.round(fps / 2)));*/
+				},(1000/(fps/deathAnimationRatio)))
 			}
 			deadAnimationHandle = setTimeout(function(){
 				++currentTry;

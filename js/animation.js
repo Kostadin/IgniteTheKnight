@@ -33,6 +33,10 @@ function getPlayerAnimationFrame(frame, state, direction) {
 		case PlayerState.Winning: {
 			return getSpriteCoords($playerXml, "gg"+playerMiscAnimation[0]);
 			}
+		case PlayerState.Dying: {
+			if (playerDyingFrame < playerDeathAnimation.length - 1) playerCrashingFrame++
+			return getSpriteCoords($playerXml, "d"+playerDeathAnimation[playerDyingFrame]);
+			}
 		default: {
 			var info = {
 				x: 0,
