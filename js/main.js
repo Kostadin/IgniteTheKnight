@@ -77,6 +77,7 @@ function loadLevel(id){
 				this.resetTransitionStepsTo(stepsJumping);
 				if (this.state != state){
 					desiredJump = false;
+					playSFX(jumpFX);
 					console.log("I don't want to jump anymore.");
 				}
 			} else if (state == PlayerState.Crashing){
@@ -88,6 +89,7 @@ function loadLevel(id){
 						return; // Prevents the state to be overwritten you PlayerState.Crashing
 					} else {
 						this.resetTransitionStepsTo(stepsCrashing);
+						playSFX(crashFX);
 						console.log('We crashed.');
 					}
 				} else {
@@ -103,11 +105,13 @@ function loadLevel(id){
 				this.resetTransitionStepsTo(stepsDying);
 				if (this.state != state){
 					playerDyingFrame = 0;
+					playSFX(deathFX);
 					console.log('We are dying :(');
 				}
 			} else if (state == PlayerState.Winning){
 				this.resetTransitionStepsTo(stepsWinning);
 				if (this.state != state){
+					playSFX(winFX);
 					console.log('We are winning!');
 				}
 			} else {
