@@ -405,7 +405,7 @@ function runGame(){
 function startGame(){
 	if (!gameRunning){
 		currentTry = 0;
-		currentLevelIndex = 5;
+		currentLevelIndex = 2;
 		titleVideoPlayer.pause();
 		
 		$('#levelNumber').html(currentLevelIndex+1);
