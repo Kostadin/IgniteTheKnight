@@ -18,9 +18,34 @@ function tileVisible(tile){
 		return false;
 }
 
+function updateHeart(index){
+	var $heart = $('#heart'+index);
+	if (currentLives>=(index)){
+		$heart.css({
+			'background-position': '0px 0px'
+		});
+	} else if (((index-1)< currentLives) && (currentLives < (index))){
+		$heart.css({
+			'background-position': '-64px 0px'
+		});
+	} else {
+		$heart.css({
+			'background-position': '-128px 0px'
+		});
+	}
+}
+
+function updateLivesDisplay(){
+	console.log(currentLives);
+	updateHeart(1);
+	updateHeart(2);
+	updateHeart(3);
+}
+
 function loadLevel(id){
 	currentLevelIndex = id;
 	currentLevel = jQuery.extend(true, {}, levels[id]);//Deep copy
+	currentLives = maxLives;
 	var p = {
 		i: currentLevel.startPosition[0],
 		j: currentLevel.startPosition[1],
@@ -42,6 +67,7 @@ function loadLevel(id){
 		transitionStateTo: function(state){
 			if (state == PlayerState.Idle){
 				this.resetTransitionStepsTo(stepsIdle);
+				desiredMoveDirection = null;
 				if (this.state != state){
 					console.log('We are idle.');
 				}
@@ -54,13 +80,19 @@ function loadLevel(id){
 					console.log("I don't want to jump anymore.");
 				}
 			} else if (state == PlayerState.Crashing){
-				this.resetTransitionStepsTo(stepsCrashing);
 				if (this.state != state){
-					console.log('We crashed.');
-				}
-				else {
-					state = PlayerState.Idle;
-					desiredMoveDirection = null;
+					currentLives -= 0.5;
+					updateLivesDisplay();
+					if (currentLives <= 0){
+						this.transitionStateTo(PlayerState.Incapacitated);
+						return; // Prevents the state to be overwritten you PlayerState.Crashing
+					} else {
+						this.resetTransitionStepsTo(stepsCrashing);
+						console.log('We crashed.');
+					}
+				} else {
+					this.transitionStateTo(PlayerState.Idle);
+					return; // Prevents the state to be overwritten you PlayerState.Crashing
 				}
 			} else if (state == PlayerState.Incapacitated){
 				this.resetTransitionStepsTo(stepsIncapacitated);
@@ -140,7 +172,8 @@ function loadLevel(id){
 	$('#level').append(player);
 	$('#level').append(tiles);
 	$('#level').append(items);
-	$('#level').css({
+	updateLivesDisplay();
+	$('#level, #heart_overlay').css({
 		display: 'block'
 	});
 	leftPressed = false;
@@ -276,6 +309,7 @@ function runGame(){
 					currentTry = 0;
 					currentLevelIndex = 0;
 					$('#level').hide();
+					$('#heart_overlay').hide();
 					$('#gameOver').show();
 					gameOver.currentTime = 0;
 					gameOver.play();
@@ -306,6 +340,7 @@ function runGame(){
 					backgroundTrack.pause();
 					++currentLevelIndex;
 					$('#level').hide();
+					$('#heart_overlay').hide();
 					$('#levelNumber').html(currentLevelIndex+1);
 					$('#mainMenu').hide();
 					mainTheme.pause();
@@ -324,6 +359,7 @@ function runGame(){
 					currentTry = 0;
 					currentLevelIndex = 0;
 					$('#level').hide();
+					$('#heart_overlay').hide();
 					$('#youWin').show();
 					setTimeout(function(){
 						$('#youWin').hide();

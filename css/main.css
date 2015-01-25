@@ -228,3 +228,17 @@ body{
 	width:125px;
 	height:107px;
 }
+
+#heart_overlay{
+	z-index: 10;
+}
+
+.heart{
+	display: inline-block;
+	width: 64px;
+	height: 64px;
+	background-image: url('../img/hearts.png');
+	background-repeat: no-repeat;
+	margin-top: 4px;
+	margin-left: 8px;
+}

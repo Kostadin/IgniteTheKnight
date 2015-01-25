@@ -125,6 +125,9 @@ function runPhysics(){
 	if (p.transitionStepsRemaining > 0){ // Must finish animation
 		doPlayerAnimation(p);
 	} else { // Do we need to change anything?
+		var currentI = p.i;
+		var currentJ = p.j;
+		var currentTile = currentLevel.tiles[currentJ*currentLevel.map[0].length + currentI];
 		// Are we dying?
 		if (p.state == PlayerState.Dying){
 			p.dead = true;
@@ -135,12 +138,14 @@ function runPhysics(){
 			return;
 		}
 		if (p.state == PlayerState.Incapacitated){
-			p.transitionStateTo(PlayerState.Incapacitated);
-			return;
+			if (currentTile.type != lava){
+				p.transitionStateTo(PlayerState.Incapacitated);
+				return;
+			} else {
+				p.transitionStateTo(PlayerState.Dying);
+				return;
+			}
 		}
-		var currentI = p.i;
-		var currentJ = p.j;
-		var currentTile = currentLevel.tiles[currentJ*currentLevel.map[0].length + currentI];
 		if (currentTile.type == platform){
 			if (currentTile.breaking == null){
 				currentTile.breaking = 60;
