@@ -123,6 +123,6 @@
 		[6,7,"img/landmarks/Stalagmite.png"]
 	],
 	itemMap:[],
-	startPosition: [13,0]//1,1
+	startPosition: [1,1]//1,1
 
 };
