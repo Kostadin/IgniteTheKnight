@@ -107,10 +107,14 @@ function runPhysics(){
 			if (tile.breaking != null){
 				if (tile.breaking > 0){
 					tile.breaking -= 1;
-				} else {
+					if (tile.breaking < tileBreakMinor) tile.brokenStage = 1;
+					if (tile.breaking < tileBreakMajor) tile.brokenStage = 2;
+				} 
+				if (tile.breaking === 0){
 					// Transform to lava tile
 					tile.type = lavaDef.type;
 					tile.texture = lavaDef.texture;
+					tile.brokenStage = 0;
 				}
 			}
 		}

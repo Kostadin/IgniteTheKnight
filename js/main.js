@@ -97,7 +97,9 @@ function loadLevel(id){
 				width: tileWidth,
 				height: tileHeight,
 				texture: tileDef.texture,
-				breaking: null
+				breaking: null,
+				brokenStage: 0,
+				prevBrokenStage: 0
 			});
 		}
 	}
@@ -209,14 +211,32 @@ function runGame(){
 		//Tiles
 		for(var i=0;i<currentLevel.tiles.length;++i){
 			var tile = currentLevel.tiles[i];
-			if ((tile.breaking)&&(tile.breaking<=0)){
+			
+			if ((tile.breaking != null)&&(tile.breaking<=0)){
 				$('#tile_'+i).css({
 					'background-image': 'url(\''+tile.texture+'\')'
 				});
+
 				tile.breaking = null;
+				tile.brokenStage = 0;
 				//console.log('#tile_'+i+' got broken.');
 			}
-			var tileFrameInfo = getTileAnimationFrame(tileAnimationFrame, tile.type);
+			
+			if (tile.brokenStage > 0)
+			{
+				var tileFrameInfo = {x:0,y:0};
+				if (tile.brokenStage != tile.prevBrokenStage)
+				{
+					tile.prevBrokenStage = tile.brokenStage;
+					$('#tile_'+i).css({
+					'background-image': 'url(\'img/tiles/breaktile'+tile.brokenStage+'.png\')',
+					'background-position':'0px 0px'
+				});
+				}
+			} else {
+				var tileFrameInfo = getTileAnimationFrame(tileAnimationFrame, tile.type);
+			}
+			
 			$('#tile_'+i).css({
 				left: (tile.x-screenOriginX)+'px',
 				top: (tile.y-screenOriginY)+'px',
